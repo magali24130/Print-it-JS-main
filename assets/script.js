@@ -18,3 +18,10 @@ const slides = [
 	}
 ];
 
+const arrowLeft = document.querySelector('.arrow_left'); //Flèche à gauche
+const arrowRight = document.querySelector('arrow_right'); //Flèche à droite
+const bannerImg = document.querySelector('banner-img'); //Constante pour les images de la bannière
+const dots = document.querySelectorAll('dot'); //Sélectionnez tous les points
+
+let currentIndex = 0;
+
