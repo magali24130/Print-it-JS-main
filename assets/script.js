@@ -18,38 +18,20 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ];
- let numero = 0;
 
-//les variables globales
-const dots = document.querySelector(".dots");
-const slide = ["slide 1", "slide 2", "slide 3", "slide 4"]
+/* Variables */
 
+const dotsContainer = document.querySelector(".dots");
+const arrowRight = document.querySelector(".arrow_right");
+const arrowLeft = document.querySelector(".arrow_left");
+const img = document.querySelector(".banner-img");
+const tagLine = document.querySelector("#banner p");
 
-function main(){
-	displayDots();
-	ChangeSlide();
-}
+let index = 0;
 
-main();
+function createDot(i){
+	const dot= document.createElement("div");
+	dotsContainer.appendChild(dot);
+	dot.addEventListener("click")
 
-
-//affichage des dots
-	function displayDots(){
-		for(let i=0;i<slides.length;i++){
-		const dot=document.createElement("div");
-		dot.classList.add("dot");
-		dots .appendChild(dot);
-		
-
-		}
-	}
-à
-function ChangeSlide(sens){
-	numero = numero +  sens;
-	if (numero>slides.length - 1 )
-		numero = 0;
-	if (numero < 0)
-		numero = slides.length 0;
-
-	document.getElementById ("slide").src ="slides/" + slide [numero];
 }
