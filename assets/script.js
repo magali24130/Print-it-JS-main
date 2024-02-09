@@ -18,20 +18,16 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ];
+ let numero = 0;
 
 //les variables globales
-const dots=document.querySelector(".dots");
-const arrowRight = document.querySelector("arrow_right");
-const arrowLeft = document.querySelector("arrow arrow_left");
-const img = document.querySelector("container-carousel img");
-const tagLine = document.querySelector("container-tagLine");
+const dots = document.querySelector(".dots");
+const slide = ["slide 1", "slide 2", "slide 3", "slide 4"]
 
-let index = 0
 
 function main(){
 	displayDots();
-	clickRight();
-	clickLeft();
+	ChangeSlide();
 }
 
 main();
@@ -43,38 +39,17 @@ main();
 		const dot=document.createElement("div");
 		dot.classList.add("dot");
 		dots .appendChild(dot);
-		console.log(displayDots)
+		
 
 		}
 	}
+à
+function ChangeSlide(sens){
+	numero = numero +  sens;
+	if (numero>slides.length - 1 )
+		numero = 0;
+	if (numero < 0)
+		numero = slides.length 0;
 
-//affichage au clic droit*/
-	function clickRight(){
-		arrowRight.addEventListener("click",()=>{
-			const arrayDots = document.querySelectorAll(".dots.dot");
-			arrayDots [index].classList.remove("dot_selected");
-			index ++;
-			if(index>arrayslides.length -1){
-				index = 0;
-			}
-			img.src= arrayslides[index].imageUrl;
-			tagLine.textContent = arrayslides [index].title;
-			arrayDots [index].classList.add("dot_selected");
-		})
-	}
-
-//affichage au clic gauche*/
-function clickLeft(){
-	arrowLeft.addEventListener("click",()=>{
-		const arrayDots = document.querySelectorAll(".dots.dot");
-		arrayDots [index].classList.remove("dot_selected");
-		index --;
-		if (index < 0){
-			index = arrayslides.length - 1;
-		}
-		img.src= arrayslides[index].imageUrl;
-		tagLine.textContent = arrayslides [index].title;
-		arrayDots [index].classList.add("dot_selected");
-	})
+	document.getElementById ("slide").src ="slides/" + slide [numero];
 }
-
