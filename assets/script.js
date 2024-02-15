@@ -33,7 +33,7 @@ function createDot(i){
 	const dot= document.createElement("div");
 	dot.classList.add("dot");
 	dotsContainer.appendChild(dot);
-	dot.addEventListener("click",0 => {
+	dot.addEventListener("click",() => {
 		updateCarousel (i);
 	});
 	if (i === index){
@@ -84,7 +84,7 @@ function autoSlide(){
 	slideRight();
 }, 3000); /*3000 millisecondes = 3 secondes*/
 }
-	arrowRight.addEventListener("click", slideRight);
+	arrowRight.addEventListener("click",slideRight);
 	arrowLeft.addEventListener("click", slideLeft);
 	dotsContainer.addEventListener("click", ()=>{
 		clearInterval(autoSlideInterval);
