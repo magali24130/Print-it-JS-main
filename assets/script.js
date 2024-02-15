@@ -31,7 +31,70 @@ let index = 0;
 
 function createDot(i){
 	const dot= document.createElement("div");
+	dot.classList.add("dot");
 	dotsContainer.appendChild(dot);
-	dot.addEventListener("click")
+	dot.addEventListener("click",0 => {
+		updateCarousel (i);
+	});
+	if (i === index){
+		dot.classList.add ("dot_selected");
+	}
 
 }
+
+
+function displayDots(){
+	for (let i = 0; i < slides.length; i++){
+		createDot(i);
+	}
+}
+
+
+function updateCarousel(i){
+	const selectDots = document.querySelectorAll(".dots.dot");
+	selectDots[index].classList.remove("dot_selected");
+	index = i;
+	img.src = slides[index].imageUrl;
+	tagLine.innerHTML = slides[index].tagLine;
+	selectDots[index].classList.add("dot_selected");
+}
+
+function slide(direction){
+	const selectDots = document.querySelectorAll(".dots.dot");
+	selectDots[index].classList.remove("dot_selected");
+	if ( direction === "right"){
+		index = (index - 1) % slides.length;
+	} else {
+		index = (index - 1 + slides.length) % slides.length;
+	}
+	tagLine.innerHTML = slides[index].tagLine;
+	selectDots[index].classList.add("dot_selected");
+}
+
+function slideRight(){
+	slide("right");
+}
+
+function slideLeft(){
+	slide("left");
+}
+
+function autoSlide(){
+	autoSlideInterval = setInterval (() => {
+	slideRight();
+}, 3000); /*3000 millisecondes = 3 secondes*/
+}
+	arrowRight.addEventListener("click", slideRight);
+	arrowLeft.addEventListener("click", slideLeft);
+	dotsContainer.addEventListener("click", ()=>{
+		clearInterval(autoSlideInterval);
+		autoSlide();
+	});
+	for (let i = 0; i<slides.length;i++){
+		const imageObj = new Image();
+		imageObj.src = slides[i].imageUrl;
+}
+
+preloadImages();
+	autoSlide();
+	displayDots();
