@@ -1,100 +1,93 @@
 //script.js
 
 const slides = [
-	{
-		"image":"slide1.jpg",
-		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
-	},
-	{
-		"image":"slide2.jpg",
-		"tagLine":"Tirages haute définition grand format <span>pour vos bureaux et events</span>"
-	},
-	{
-		"image":"slide3.jpg",
-		"tagLine":"Grand choix de couleurs <span>de CMJN aux pantones</span>"
-	},
-	{
-		"image":"slide4.png",
-		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
-	}
+  {
+    image: "slide1.jpg",
+    tagLine: "Impressions tous formats <span>en boutique et en ligne</span>",
+  },
+  {
+    image: "slide2.jpg",
+    tagLine:
+      "Tirages haute définition grand format <span>pour vos bureaux et events</span>",
+  },
+  {
+    image: "slide3.jpg",
+    tagLine: "Grand choix de couleurs <span>de CMJN aux pantones</span>",
+  },
+  {
+    image: "slide4.png",
+    tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
+  },
 ];
 
-/* Variables */
+let position = 0; 
+const numberOfSlide = slides.length;
 
-const dotsContainer = document.querySelector(".dots");
-const arrowRight = document.querySelector(".arrow_right");
-const arrowLeft = document.querySelector(".arrow_left");
-const img = document.querySelector(".banner-img");
-const tagLine = document.querySelector("#banner p");
+createCaroussel(position);
+createDots();
+updateDot();
 
-let index = 0;
 
-function createDot(i){
-	const dot= document.createElement("div");
-	dot.classList.add("dot");
-	dotsContainer.appendChild(dot);
-	dot.addEventListener("click",() => {
-		updateCarousel (i);
-	});
-	if (i === index){
-		dot.classList.add ("dot_selected");
-	}
+const left = document.querySelector('.arrow_left');
+const right = document.querySelector('.arrow_right');
 
+
+
+
+left.addEventListener("click", function () {
+    if (position == 0) {
+        position = numberOfSlide - 1;
+    }
+    else {
+        position--;
+    }
+        createCaroussel(position);
+});
+
+right.addEventListener("click", function () {
+    if (position == numberOfSlide - 1) {
+        position = 0;
+    } else {
+            position++;
+    }
+    createCaroussel(position);
+
+});
+
+function createDots(){
+	 const dots = document.querySelector(".dots");	
+	for (let index = 0; index < slides.length; index++) {
+		// Pour chaque element dans la boucle je vais créer un dot
+		const dot= document.createElement("div");
+		dot.setAttribute("class", "dot");
+		dots.appendChild(dot);
+	} 
 }
 
-
-function displayDots(){
-	for (let i = 0; i < slides.length; i++){
-		createDot(i);
-	}
+function updateDot() {
+  const listPoints = document.querySelectorAll(".dot");	
+   for (let index = 0; index < listPoints.length; index++) {
+   
+    const dot = listPoints[index];
+	if (index == position){
+		dot.classList.add('dot_selected');		
+  }
+  else{
+    dot.classList.remove('dot_selected');	 
+  }
+    
+	}  
 }
 
+function createCaroussel(position){
+	
+  	const element = slides[position];
+		//console.log(element);
+		const img = document.querySelector(".banner-img");
+		img.setAttribute("src" , "./assets/images/slideshow/"+ element.image);
 
-function updateCarousel(i){
-	const selectDots = document.querySelectorAll(".dots.dot");
-	selectDots[index].classList.remove("dot_selected");
-	index = i;
-	img.src = slides[index].imageUrl;
-	tagLine.innerHTML = slides[index].tagLine;
-	selectDots[index].classList.add("dot_selected");
-}
+		const p = document.querySelector(".banner-txt");
+		p.innerHTML= element.tagLine;
 
-function slide(direction){
-	const selectDots = document.querySelectorAll(".dots.dot");
-	selectDots[index].classList.remove("dot_selected");
-	if ( direction === "right"){
-		index = (index - 1) % slides.length;
-	} else {
-		index = (index - 1 + slides.length) % slides.length;
-	}
-	tagLine.innerHTML = slides[index].tagLine;
-	selectDots[index].classList.add("dot_selected");
+    updateDot();
 }
-
-function slideRight(){
-	slide("right");
-}
-
-function slideLeft(){
-	slide("left");
-}
-
-function autoSlide(){
-	autoSlideInterval = setInterval (() => {
-	slideRight();
-}, 3000); /*3000 millisecondes = 3 secondes*/
-}
-	arrowRight.addEventListener("click",slideRight);
-	arrowLeft.addEventListener("click", slideLeft);
-	dotsContainer.addEventListener("click", ()=>{
-		clearInterval(autoSlideInterval);
-		autoSlide();
-	});
-	for (let i = 0; i<slides.length;i++){
-		const imageObj = new Image();
-		imageObj.src = slides[i].imageUrl;
-}
-
-preloadImages();
-	autoSlide();
-	displayDots();
