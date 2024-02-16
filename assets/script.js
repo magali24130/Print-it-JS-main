@@ -57,7 +57,6 @@ right.addEventListener("click", function () {
 function createDots(){
 	 const dots = document.querySelector(".dots");	
 	for (let index = 0; index < slides.length; index++) {
-		// Pour chaque element dans la boucle je vais créer un dot
 		const dot= document.createElement("div");
 		dot.setAttribute("class", "dot");
 		dots.appendChild(dot);
