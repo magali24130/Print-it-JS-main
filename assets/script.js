@@ -47,7 +47,8 @@ left.addEventListener("click", function () {
 right.addEventListener("click", function () {
     if (position == numberOfSlide - 1) {
         position = 0;
-    } else {
+    } 
+    else {
             position++;
     }
     createCaroussel(position);
@@ -81,7 +82,6 @@ function updateDot() {
 function createCaroussel(position){
 	
   	const element = slides[position];
-		//console.log(element);
 		const img = document.querySelector(".banner-img");
 		img.setAttribute("src" , "./assets/images/slideshow/"+ element.image);
 
